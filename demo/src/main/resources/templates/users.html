@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Users</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f7f9fb;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 20px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0f7fa;
+        }
+
+        td {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Registered Blood Donors</h2>
+
+<table>
+    <tr>
+        <th>User Name</th>
+        <th>Age</th>
+        <th>City</th>
+        <th>Phone</th>
+        <th>Blood Group</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.userName}">UserName</td>
+        <td th:text="${user.age}">Age</td>
+        <td th:text="${user.city}">City</td>
+        <td th:text="${user.phone}">Phone</td>
+        <td th:text="${user.bloodGroup}">Blood</td>
+    </tr>
+</table>
+
+</body>
+</html>
