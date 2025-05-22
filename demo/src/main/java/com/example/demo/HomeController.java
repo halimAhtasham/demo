@@ -2,18 +2,14 @@ package com.example.demo;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -22,10 +18,16 @@ public class HomeController {
     @Autowired
     private UserRepository userRepository;
 
-//    @GetMapping("/")
-//    public String index() {
-//        return "index.html";
-//    }
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @GetMapping("/")
+    public String index(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName(); // get logged-in username
+        model.addAttribute("username", username);
+        return "index";
+    }
 
     @GetMapping("/register")
     public String showRegisterForm() {
@@ -34,6 +36,9 @@ public class HomeController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user) {
+        // Encrypt the password before saving
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         userRepository.save(user);
         return "redirect:/login";  // after registration, go to login page
     }
@@ -42,37 +47,33 @@ public class HomeController {
     public String showLoginPage() {
         return "login";
     }
-    @PostMapping("/login")
-    public void loginUser(@RequestParam String userName,
-                          @RequestParam int password,
-                          HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
-
-        User user = userRepository.findByUserNameAndPassword(userName, password);
-
-        if (user != null) {
-            request.getSession().setAttribute("loggedInUser", user);
-            response.sendRedirect("/users"); // welcome -> users
-        } else {
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('Invalid username or password.'); window.location.href = '/login.html';</script>");
-        }
-    }
 
     @GetMapping("/users")
-    public String listAllUsers(HttpServletRequest request, Model model) {
-        User loggedInUser = (User) request.getSession().getAttribute("loggedInUser");
-
-        if (loggedInUser == null) {
-            return "redirect:/login"; // block access if not logged in
-        }
-
+    public String listAllUsers(Model model) {
         List<User> users = userRepository.findAll();
         model.addAttribute("users", users);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        model.addAttribute("username", username);
+
         return "users";
     }
 
-
-
+    @GetMapping("/api/users/search")
+    @ResponseBody
+    public List<User> searchUsers(
+            @RequestParam(required = false) String bloodGroup,
+            @RequestParam(required = false) String city
+    ) {
+        if ((bloodGroup != null && !bloodGroup.isEmpty()) && (city != null && !city.isEmpty())) {
+            return userRepository.findByBloodGroupContainingIgnoreCaseAndCityContainingIgnoreCase(bloodGroup, city);
+        } else if (bloodGroup != null && !bloodGroup.isEmpty()) {
+            return userRepository.findByBloodGroupContainingIgnoreCase(bloodGroup);
+        } else if (city != null && !city.isEmpty()) {
+            return userRepository.findByCityContainingIgnoreCase(city);
+        } else {
+            return userRepository.findAll();
+        }
+    }
 }
