@@ -2,12 +2,94 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>All Users</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f7f9fb;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+        }
+
+        .top-bar {
+            background: #FE3C47;
+            line-height: 45px;
+            color: #FFFFFF;
+            font-size: 16px;
+        }
+        .top-bar i {
+            font-size: 18px;
+            color: #FFFFFF;
+            margin-right: 5px;
+            display: inline-block;
+        }
+        .top-bar a {
+            color: #FFFFFF;
+        }
+        .top-bar p {
+            font-size: 16px;
+            margin-top: 10px;
+            color: #FFFFFF;
+        }
+        .top-bar-social {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+        }
+
+
+        .navbar-default {
+            background-color: #fff;
+            border: none;
+            margin-bottom: 0;
+        }
+
+        .navbar-header .logo img {
+            max-height: 50px;
+            margin-top: 10px;
+        }
+
+        .navbar-nav > li > a {
+            font-weight: bold;
+            color: #2c2c2c !important;
+            text-transform: uppercase;
+            padding: 20px 15px;
+        }
+
+        .navbar-nav > li.active > a,
+        .navbar-nav > li > a:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn-login {
+            background-color: #d42d2d;
+            color: white !important;
+            padding: 8px 16px;
+            margin-top: 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 767px) {
+            .btn-login {
+                display: block;
+                margin: 10px auto;
+            }
+
+            .navbar-nav {
+                margin: 0;
+            }
         }
 
         h2 {
@@ -51,6 +133,68 @@
     </style>
 </head>
 <body>
+
+<!--  HEADER -->
+
+<header class="main-header clearfix" data-sticky_header="true">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6">
+                    <p>রক্ত দান, নব প্রাণ, রক্তিম উৎসর্গ অবিরাম!</p>
+                </div>
+                <div class="col-md-4 col-sm-6 top-bar-social">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <section class="header-wrapper navigation-wrapper">
+        <nav class="navbar navbar-default">
+            <div class="container">
+
+                <!-- Logo -->
+                <div class="navbar-header">
+                    <a class="navbar-brand logo" href="/">
+                        <img th:src="@{/images/logo.png}" alt="Blood Donation Logo">
+                    </a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Menu -->
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/static/about-us.html">About Us</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/static/faq.html">FAQ</a></li>
+                                <li><a href="/static/gallery-2.html">Gallery</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/static/contact.html">Contact</a></li>
+                        <li><a href="/login" class="btn-login">Login</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </section>
+
+</header>
 
 <h2>Registered Blood Donors</h2>
 
