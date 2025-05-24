@@ -16,82 +16,13 @@
     <link th:href="@{/css/owl.carousel.css}" rel="stylesheet" type="text/css" >
     <link th:href="@{/css/venobox.css}" rel="stylesheet" type="text/css" >
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
-    <style>
-        h2 {
-            text-align: center;
-            color: #333;
-            margin: 40px 0 20px;
-            font-size: 30px;
-            font-weight: bold;
-        }
-        .search-box {
-            width: 80%;
-            margin: auto;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .search-box input {
-            padding: 10px;
-            width: 250px;
-            margin: 0 10px 10px 0;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 0 20px 60px;
-        }
-        .user-card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 20px;
-            width: 280px;
-            text-align: left;
-            transition: transform 0.3s;
-        }
-        .user-card:hover {
-            transform: translateY(-5px);
-        }
-        .user-card h4 {
-            margin-top: 0;
-            font-size: 20px;
-            color: #d42d2d;
-        }
-        .user-card p {
-            margin: 5px 0;
-            font-size: 15px;
-            color: #555;
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .pagination button {
-            margin: 0 5px;
-            padding: 8px 16px;
-            border: none;
-            background-color: #d42d2d;
-            color: white;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        .pagination button:disabled {
-            background-color: #ccc;
-        }
-    </style>
 </head>
 
 <body>
 
-<div id="preloader">
-    <span class="margin-bottom"><img th:src="@{/images/loader.gif}" alt="" /></span>
-</div>
+<!--<div id="preloader">-->
+<!--    <span class="margin-bottom"><img th:src="@{/images/loader.gif}" alt="" /></span>-->
+<!--</div>-->
 
 <!--  HEADER -->
 <header class="main-header clearfix" data-sticky_header="true">
@@ -136,8 +67,7 @@
                                 <li><a href="/gallery-2.html">Gallery</a></li>
                             </ul>
                         </li>
-<!--                        <li><a href="/contact">Contact</a></li>-->
-                        <li><a th:href="@{/contact}">Contact</a></li>
+                        <li class="active"><a th:href="@{/contact}">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -145,20 +75,108 @@
     </section>
 </header>
 
-<h2>Registered Blood Donors</h2>
-<div class="search-box">
-    <input type="text" id="bloodGroup" placeholder="Blood Group (e.g. A+)" />
-    <input type="text" id="city" placeholder="City (e.g. Dhaka)" />
-</div>
+<!--  PAGE HEADING -->
+<section class="page-header" data-stellar-background-ratio="1.2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h3>Contact Us</h3>
+                <p class="page-breadcrumb"><a href="#">Home</a> / Contact</p>
+            </div>
+        </div>
+    </div>
+</section> <!-- end .page-header  -->
 
-<div class="card-container" id="userCardContainer">
-    <!-- Cards will be injected here -->
-</div>
+<!--  MAIN CONTENT  -->
+<section class="section-content-block section-contact-block no-bottom-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="contact-title">Contact us</h2>
+            </div>
+            <div class="col-md-3">
+                <ul class="contact-info">
+                    <li>
+                        <span class="icon-container"><i class="fa fa-home"></i></span>
+                        <address>12/13, Narayanganj</address>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="contact-info">
+                    <li>
+                        <span class="icon-container"><i class="fa fa-phone"></i></span>
+                        <address><a href="#">+093-120-525-9162</a></address>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="contact-info">
+                    <li>
+                        <span class="icon-container"><i class="fa fa-envelope"></i></span>
+                        <address><a href="mailto:support@donation.com">support@donation.com</a></address>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="contact-info">
+                    <li>
+                        <span class="icon-container"><i class="fa fa-globe"></i></span>
+                        <address><a href="#">www.yourdomain.com</a></address>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
-<div class="pagination">
-    <button id="prevPage" onclick="changePage(-1)">Previous</button>
-    <button id="nextPage" onclick="changePage(1)">Next</button>
-</div>
+<section class="section-content-block section-contact-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 wow fadeInLeft">
+                <div class="contact-form-block">
+                    <h2 class="contact-title">Say hello to us</h2>
+                    <form role="form" th:action="@{/contact/send}" method="post" id="contact-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="user_name" name="user_name"
+                                   placeholder="Name" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-control">
+                            <input type="text" class="form-control" id="email_subject" name="email_subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="5" name="email_message" id="email_message"
+                                      placeholder="Message" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-custom">Send Now</button>
+                        </div>
+                    </form>
+                    <div th:if="${message}" class="alert alert-success" style="margin-top: 20px;">
+                        <p th:text="${message}"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 wow fadeInRight">
+                <h2 class="contact-title">Our Location</h2>
+                <div class="section-google-map-block wow fadeInUp">
+                    <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3649.4247975718363!2d90.54822067353979!3d23.83904478537084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b18b7e94d7%3A0x2b8aa89c9df7c4f7!2sState%20University%20of%20Bangladesh!5e0!3m2!1sen!2sbd!4v1739027578375!5m2!1sen!2sbd"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- START FOOTER -->
 <footer>
     <section class="footer-widget-area footer-widget-area-bg">
         <div class="container">
@@ -248,67 +266,7 @@
     </section>
 </footer>
 <!-- END FOOTER -->
-
-<script>
-    let allUsers = [];
-    let currentPage = 1;
-    const cardsPerPage = 12;
-
-    function fetchUsers() {
-        const bloodGroup = document.getElementById("bloodGroup").value;
-        const city = document.getElementById("city").value;
-
-        fetch(`/api/users/search?bloodGroup=${bloodGroup}&city=${city}`)
-            .then(response => response.json())
-            .then(data => {
-                allUsers = data;
-                currentPage = 1;
-                renderPage();
-            });
-    }
-
-    function renderPage() {
-        const container = document.getElementById("userCardContainer");
-        container.innerHTML = "";
-
-        const start = (currentPage - 1) * cardsPerPage;
-        const end = start + cardsPerPage;
-        const usersToDisplay = allUsers.slice(start, end);
-
-        usersToDisplay.forEach(user => {
-            const card = `<div class="user-card">
-            <h4>${user.userName}</h4>
-            <p><strong>Age:</strong> ${user.age}</p>
-            <p><strong>City:</strong> ${user.city}</p>
-            <p><strong>Phone:</strong> ${user.phone}</p>
-            <p><strong>Blood Group:</strong> ${user.bloodGroup}</p>
-        </div>`;
-            container.innerHTML += card;
-        });
-
-        document.getElementById("prevPage").disabled = currentPage === 1;
-        document.getElementById("nextPage").disabled = end >= allUsers.length;
-    }
-
-    function changePage(offset) {
-        currentPage += offset;
-        renderPage();
-    }
-
-    document.getElementById("bloodGroup").addEventListener("input", fetchUsers);
-    document.getElementById("city").addEventListener("input", fetchUsers);
-    window.onload = fetchUsers;
-</script>
-<script th:src="@{/js/jquery.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/wow.min.js}"></script>
-<script th:src="@{/js/jquery.backTop.min.js}"></script>
-<script th:src="@{/js/waypoints.min.js}"></script>
-<script th:src="@{/js/waypoints-sticky.min.js}"></script>
-<script th:src="@{/js/owl.carousel.min.js}"></script>
-<script th:src="@{/js/jquery.stellar.min.js}"></script>
-<script th:src="@{/js/jquery.counterup.min.js}"></script>
-<script th:src="@{/js/venobox.min.js}"></script>
-<script th:src="@{/js/custom-scripts.js}"></script>
+<!-- Back To Top Button  -->
+<a id="backTop">Back To Top</a>
 </body>
 </html>

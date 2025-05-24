@@ -76,4 +76,9 @@ public class HomeController {
             return userRepository.findAll();
         }
     }
+
+    @GetMapping("/contact")
+    public String showContactPage() {
+        return "contact";
+    }
 }
